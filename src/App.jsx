@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout";
 import { UserContextProvider } from "./components/UserContext";
+import Account from "./pages/Account";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<IndexPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
         </Route>
       </Routes>
     </UserContextProvider>
