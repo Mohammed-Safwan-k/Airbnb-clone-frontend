@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
+import PlacesPage from "./PlacesPage";
 
 const Account = () => {
   const [redirect, setRedirect] = useState(null);
@@ -60,6 +61,7 @@ const Account = () => {
           </button>
         </div>
       )}
+      {subpage === "places" && <PlacesPage />}
     </div>
   );
 };
