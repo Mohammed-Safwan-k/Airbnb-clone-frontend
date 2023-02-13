@@ -1,9 +1,12 @@
+import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
+
+axios.defaults.baseURL = "http://localhost:4000";
 
 function App() {
   return (
