@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 import { UserContextProvider } from "./components/UserContext";
 import PlacesPage from "./pages/Account/Places/PlacesPage";
 import ProfilePage from "./pages/Account/ProfilePage";
-import IndexPage from "./pages/IndexPage";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/Register/LoginPage";
 import Register from "./pages/Register/Register";
 import PlacesFormPage from "./pages/Account/Places/PlacesFormPage";
@@ -18,7 +18,7 @@ function App() {
     <UserContextProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<IndexPage />} />
+          <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account" element={<ProfilePage />} />
