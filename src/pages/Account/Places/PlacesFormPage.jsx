@@ -159,7 +159,7 @@ const PlacesFormPage = () => {
           </div>
         </div>
         <div>
-          <button className="primary my-4">Add Place</button>
+          <button className="primary my-4">Save Place</button>
         </div>
       </form>
     </div>
