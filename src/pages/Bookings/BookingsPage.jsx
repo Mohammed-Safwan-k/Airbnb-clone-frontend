@@ -1,7 +1,12 @@
 import React from "react";
+import AccountNav from "../Account/AccountNav";
 
 const BookingsPage = () => {
-  return <div>my bookings</div>;
+  return (
+    <div>
+      <AccountNav />
+    </div>
+  );
 };
 
 export default BookingsPage;
