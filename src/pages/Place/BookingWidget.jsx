@@ -3,8 +3,10 @@ import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
+import ReactDOM from "react-dom";
 
 const BookingWidget = ({ place }) => {
+  const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
@@ -12,6 +14,7 @@ const BookingWidget = ({ place }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [redirect, setRedirect] = useState("");
+  const [isPaypal, setIsPaypal] = useState(false);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -28,8 +31,18 @@ const BookingWidget = ({ place }) => {
       new Date(checkIn)
     );
   }
-
-  async function bookThisPlace() {
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: numberOfNights * place.price,
+          },
+        },
+      ],
+    });
+  };
+  const onApprove = async (data, actions) => {
     const response = await axios.post("/booking", {
       checkIn,
       checkOut,
@@ -42,7 +55,8 @@ const BookingWidget = ({ place }) => {
     });
     const bookingId = response.data._id;
     setRedirect(`/account/bookings/${bookingId}`);
-  }
+    return actions.order.capture();
+  };
 
   if (redirect) {
     return <Navigate to={redirect} />;
@@ -106,12 +120,19 @@ const BookingWidget = ({ place }) => {
           </div>
         )}
       </div>
-      <button onClick={bookThisPlace} className="primary mt-4">
-        Book This Place{" "}
-        {numberOfNights > 0 && (
-          <span> for ${numberOfNights * place.price}</span>
-        )}
-      </button>
+      {isPaypal ? (
+        <PayPalButton
+          createOrder={(data, actions) => createOrder(data, actions)}
+          onApprove={(data, actions) => onApprove(data, actions)}
+        />
+      ) : (
+        <button onClick={() => setIsPaypal(true)} className="primary mt-4">
+          Book This Place{" "}
+          {numberOfNights > 0 && (
+            <span> for ${numberOfNights * place.price}</span>
+          )}
+        </button>
+      )}
     </div>
   );
 };
