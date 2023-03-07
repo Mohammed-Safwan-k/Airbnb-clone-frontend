@@ -13,7 +13,7 @@ import PlacePage from "./pages/Place/PlacePage";
 import BookingsPage from "./pages/Bookings/BookingsPage";
 import SingleBooking from "./pages/Bookings/SingleBooking";
 
-axios.defaults.baseURL = "http://127.0.0.1:4000";
+axios.defaults.baseURL = "https://airbnbbackend.cyclic.app";
 axios.defaults.withCredentials = true;
 
 function App() {
